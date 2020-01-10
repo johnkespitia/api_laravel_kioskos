@@ -13,6 +13,15 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::post('register', 'Auth\RegisterController@register');
+Route::post('login', 'Auth\LoginController@login');
+
+Route::group(['middleware' => 'auth:api'], function() {
+    Route::post('logout', 'Auth\LoginController@logout');
+    Route::get('persona/tipos-documentos', 'PersonaController@obtenerTiposDocumentos');
+    Route::get('persona/obtener/{cedula}', 'PersonaController@obtenerPersona');
+    Route::get('persona/todos', 'PersonaController@personas');
+    Route::post('persona/editar', 'PersonaController@editar');
+    Route::put('persona/nueva', 'PersonaController@nuevo');
+    Route::delete('persona/eliminar/{cedula}', 'PersonaController@eliminar');
 });

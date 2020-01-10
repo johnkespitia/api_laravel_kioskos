@@ -22,6 +22,9 @@ class Persona extends Migration
             $table->string('numero_documento',12)->nullable(false)->unique();
             $table->integer('tipo_documento_id')->unsigned()->nullable(false);
             $table->foreign('tipo_documento_id')->references('id')->on('tipo_documento');
+            $table->boolean('disponible')->default(true);
+            $table->dateTime('fecha_registro');
+            $table->dateTime('fecha_actualizacion');
         });
     }
 
